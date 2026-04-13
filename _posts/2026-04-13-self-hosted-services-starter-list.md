@@ -1,27 +1,10 @@
-from pathlib import Path
-import datetime as dt
-
-base = Path(__file__).resolve().parents[1]
-keywords = [line.strip() for line in (base / 'content' / 'keywords.txt').read_text(encoding='utf-8').splitlines() if line.strip()]
-if not keywords:
-    raise SystemExit('No keywords found')
-idx = dt.date.today().toordinal() % len(keywords)
-keyword = keywords[idx]
-today = dt.date.today().isoformat()
-slug = keyword.lower().replace(' ', '-').replace('/', '-')[:80]
-post = base / '_posts' / f'{today}-{slug}.md'
-if post.exists():
-    print(f'already exists: {post.name}')
-    raise SystemExit(0)
-
-title = keyword.title()
-content = f'''---
+---
 layout: post
-title: "{title}"
-date: {today} 09:00:00 -0400
+title: "Self Hosted Services Starter List"
+date: 2026-04-13 09:00:00 -0400
 ---
 
-# {title}
+# Self Hosted Services Starter List
 
 A homelab should solve a real problem first. If you want useful value quickly, focus on the services that improve reliability, visibility, and convenience before you start experimenting.
 
@@ -56,6 +39,3 @@ If this is your first lab, install a virtualization layer, add DNS filtering, an
 - A small UPS
 - A decent SSD
 - A backup drive
-'''
-post.write_text(content, encoding='utf-8')
-print(post)
