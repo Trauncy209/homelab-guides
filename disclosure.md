@@ -1,3 +1,8 @@
-# Disclosure
+---
+layout: default
+title: Disclosure
+permalink: /disclosure/
+---
 
-Some posts may contain affiliate links. Recommendations stay useful first and commercial second.
+<h1>Disclosure</h1>
+<p class="muted">Some posts may include affiliate links. I only keep links that genuinely fit the recommendation.</p>

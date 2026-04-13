@@ -1,12 +1,12 @@
 from pathlib import Path
 import datetime as dt
+import random
 
 base = Path(__file__).resolve().parents[1]
 keywords = [line.strip() for line in (base / 'content' / 'keywords.txt').read_text(encoding='utf-8').splitlines() if line.strip()]
 if not keywords:
     raise SystemExit('No keywords found')
-idx = dt.date.today().toordinal() % len(keywords)
-keyword = keywords[idx]
+keyword = keywords[dt.date.today().toordinal() % len(keywords)]
 today = dt.date.today().isoformat()
 slug = keyword.lower().replace(' ', '-').replace('/', '-')[:80]
 post = base / '_posts' / f'{today}-{slug}.md'
@@ -14,48 +14,36 @@ if post.exists():
     print(f'already exists: {post.name}')
     raise SystemExit(0)
 
-title = keyword.title()
+openers = [
+    'The easiest way to make a homelab useful is to give it one job that matters.',
+    'If the server is noisy, overcomplicated, or hard to trust, you will stop using it.',
+    'I like homelabs that quietly replace something annoying in daily life.'
+]
+core = [
+    ('One useful service', 'Pick one thing you will actually use this week: DNS filtering, file sync, backups, or a simple dashboard.'),
+    ('Keep recovery easy', 'Snapshots and backups matter more than fancy hardware. If something breaks, you want the fix to be boring.'),
+    ('Don\'t overbuild', 'A small machine that stays on beats a big machine that becomes a project.')
+]
+lead = random.choice(openers)
+first, second, third = random.sample(core, 3)
 content = f'''---
 layout: post
-title: "{title}"
+title: "{keyword.title()}"
 date: {today} 09:00:00 -0400
 ---
 
-# {title}
+{lead}
 
-A homelab should solve a real problem first. If you want useful value quickly, focus on the services that improve reliability, visibility, and convenience before you start experimenting.
+## {first[0]}
+{first[1]}
 
-## Start with a stable host
-Pick hardware that can run quietly, stay on, and recover cleanly after a reboot. A small tower, mini PC, or repurposed desktop is usually enough.
+## {second[0]}
+{second[1]}
 
-## Get the network basics right
-Set a reserved IP, keep DNS simple, and make sure you can reach the machine from your normal devices. If the network is annoying, you will stop using the lab.
+## {third[0]}
+{third[1]}
 
-## Deploy one service at a time
-Choose one service you will use this week:
-- DNS filtering
-- File sync
-- Media server
-- Backup target
-- Monitoring dashboard
-
-## Build a backup path early
-If the data matters, back it up. A lot of homelabs fail because they become useful before they become resilient.
-
-## Common mistakes
-- Buying too much hardware too soon
-- Running noisy services before the lab is stable
-- Skipping backups
-- Ignoring power draw and heat
-
-## Recommended next step
-If this is your first lab, install a virtualization layer, add DNS filtering, and then build one useful service around your daily workflow.
-
-## Suggested links
-- Proxmox or another virtualization layer
-- A small UPS
-- A decent SSD
-- A backup drive
+What I would do first: install a stable base, keep the network simple, and add one service that saves time instead of just looking clever.
 '''
 post.write_text(content, encoding='utf-8')
 print(post)
