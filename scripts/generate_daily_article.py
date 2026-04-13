@@ -13,37 +13,23 @@ post = base / '_posts' / f'{today}-{slug}.md'
 if post.exists():
     print(f'already exists: {post.name}')
     raise SystemExit(0)
-
-openers = [
-    'The easiest way to make a homelab useful is to give it one job that matters.',
-    'If the server is noisy, overcomplicated, or hard to trust, you will stop using it.',
-    'I like homelabs that quietly replace something annoying in daily life.'
+sections = [
+    ('What changed', 'The big shift is not just the headline. It is the part of the market or stack that becomes hard to ignore.'),
+    ('Why it matters', 'The practical effect is usually on cost, complexity, or what people choose to buy next.'),
+    ('What to watch', 'The next few weeks usually reveal whether the trend is noise or something durable.'),
 ]
-core = [
-    ('One useful service', 'Pick one thing you will actually use this week: DNS filtering, file sync, backups, or a simple dashboard.'),
-    ('Keep recovery easy', 'Snapshots and backups matter more than fancy hardware. If something breaks, you want the fix to be boring.'),
-    ('Don\'t overbuild', 'A small machine that stays on beats a big machine that becomes a project.')
-]
-lead = random.choice(openers)
-first, second, third = random.sample(core, 3)
-content = f'''---
-layout: post
-title: "{keyword.title()}"
-date: {today} 09:00:00 -0400
----
-
-{lead}
-
-## {first[0]}
-{first[1]}
-
-## {second[0]}
-{second[1]}
-
-## {third[0]}
-{third[1]}
-
-What I would do first: install a stable base, keep the network simple, and add one service that saves time instead of just looking clever.
-'''
-post.write_text(content, encoding='utf-8')
+lead = random.choice([
+    'This is the kind of tech story that starts as a niche conversation and then quietly becomes a default assumption.',
+    'Useful tech coverage should explain the tradeoff, not just repeat the announcement.',
+    'The real story is often the follow-on effect: what people will change after the headline fades.'
+])
+body = [f'---', 'layout: post', f'title: "{keyword.title()}"', f'date: {today} 09:00:00 -0400', '---', '', lead, '']
+for heading, text in sections:
+    body.append(f'## {heading}')
+    body.append(text)
+    body.append('')
+body.append('The summary I would give a busy reader: pay attention to the part that affects cost, reliability, or workflow, and ignore the rest until it proves useful.')
+post.write_text('
+'.join(body) + '
+', encoding='utf-8')
 print(post)

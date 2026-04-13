@@ -1,39 +1,31 @@
 ---
 layout: default
-title: Homelab Guides
+title: TECH NEWS
 ---
 
-<p class="eyebrow">Homelab notes</p>
-<h1>Homelab Guides</h1>
-<p class="muted">Short, practical notes for people who want their home server to do something useful without turning into a full-time hobby.</p>
+<section class="hero">
+  <p class="eyebrow">Daily tech briefing</p>
+  <h1>TECH NEWS</h1>
+  <p class="muted">Practical daily coverage of the trends people actually buy, deploy, and argue about: local AI, privacy, homelabs, infrastructure, and the hardware that keeps it all moving.</p>
+  <div>
+    <a class="btn" href="{{ '/thanks/' | relative_url }}">Support the site</a>
+    <a class="btn" style="margin-left:10px" href="{{ '/donations/' | relative_url }}">Monero donations</a>
+  </div>
+</section>
 
-<div class="stack">
-  <section class="card">
-    <h2 class="section-title">Start here</h2>
-    <ul class="clean">
-      {% for post in site.posts limit:2 %}
-      <li>
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        <div class="muted">{{ post.date | date: "%b %d, %Y" }}</div>
-      </li>
-      {% endfor %}
-    </ul>
-  </section>
-
-  <section class="card">
-    <h2 class="section-title">What this site is for</h2>
-    <p>One quiet server, one useful service, and a few notes that save you time later.</p>
-  </section>
-
-  <section class="card">
-    <h2 class="section-title">Recent posts</h2>
+<div class="split" style="margin-top:20px;">
+  <section class="card highlight">
+    <span class="tag">Trending</span><span class="tag">AI</span><span class="tag">Hardware</span>
+    <h2>Latest posts</h2>
     <ul class="clean">
       {% for post in site.posts limit:5 %}
-      <li>
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        <div class="muted">{{ post.date | date: "%b %d, %Y" }}</div>
-      </li>
+      <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a><div class="muted">{{ post.date | date: "%b %d, %Y" }}</div></li>
       {% endfor %}
     </ul>
+  </section>
+  <section class="card">
+    <h2>Why this site exists</h2>
+    <p>News is useful when it helps you decide what to do next. Each post ends with the practical angle: what changed, why it matters, and what is worth watching tomorrow.</p>
+    <p class="muted">If you like the coverage, the donation page has a Monero address and a simple thank-you page for supporters.</p>
   </section>
 </div>

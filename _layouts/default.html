@@ -13,15 +13,13 @@
         <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
         <nav class="nav">
           <a href="{{ '/' | relative_url }}">Home</a>
+          <a href="{{ '/donations/' | relative_url }}">Donations</a>
+          <a href="{{ '/thanks/' | relative_url }}">Thank You</a>
           <a href="{{ '/disclosure/' | relative_url }}">Disclosure</a>
         </nav>
       </div>
     </header>
-    <main class="wrap">
-      {{ content }}
-    </main>
-    <footer class="site-footer wrap">
-      <span>Practical notes. Updated often.</span>
-    </footer>
+    <main class="wrap">{{ content }}</main>
+    <footer class="site-footer wrap">Daily tech notes, context, and practical takeaways.</footer>
   </body>
 </html>
