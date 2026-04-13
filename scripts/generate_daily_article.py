@@ -29,7 +29,5 @@ for heading, text in sections:
     body.append(text)
     body.append('')
 body.append('The summary I would give a busy reader: pay attention to the part that affects cost, reliability, or workflow, and ignore the rest until it proves useful.')
-post.write_text('
-'.join(body) + '
-', encoding='utf-8')
+post.write_text("\n".join(body) + "\n", encoding='utf-8')
 print(post)
